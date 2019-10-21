@@ -6,7 +6,7 @@
 > * [Thread 와 Android Main Thread](http://cafe.daum.net/_c21_/bbs_search_read?grpid=1MWA2&fldid=aAfL&datanum=98&docid=1MWA2%7CaAfL%7C98%7C20110704111711)
 > * [안드로이드 앱 프로세스 분리하기](https://brunch.co.kr/@huewu/4)
 
-![Process](../‎⁨img/img_process.png)
+![Process](img/img_process.png)
 
 #### Program
 명령과 데이터로 구성되어 저장 장치(Storage Device)에 저장된 형태의 실행코드
@@ -29,7 +29,7 @@
 사용자가 입력할 이벤트 처리, 화면 GUI 그리기 /
 _순차처리가 중요하므로 꼭 동일한 쓰레드에서 처리_
 
-  ![MainThread](../img/img_andoid_mainthread.png)
+  ![MainThread](img/img_andoid_mainthread.png)
 
   **처리 순서**
   * System Event Message 전달
