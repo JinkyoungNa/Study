@@ -53,38 +53,10 @@ HandlerThread를 별도로 개발하지 않고도 사용 가능. 제네릭스(Ge
 
 > ##### Refs
 > * [Executor Framework에대한 고찰 - 1](https://www.childc.co.kr/629)
-> * [Executor Framework에대한 고찰 - 2](https://www.childc.co.kr/631)
-> * [Executor Framework에대한 고찰 - 3](https://www.childc.co.kr/633)
 > * [Executor 프레임워크](https://12bme.tistory.com/359)
 > * [Volatile](https://www.childc.co.kr/632)
 > * [쓰레드풀 과 ForkJoinPool](https://hamait.tistory.com/612)
 > * [Java volatile이란?](https://nesoy.github.io/articles/2018-06/Java-volatile)
-
-#### Thread Pool
-  ![ThreadPool](img/img_treadpool.png)
-
-* **Thread를 과도하게 생성하게 되면?**
-  1. _Overhead_ (Thread 생성/취소/종료 후 자원을 반환하는데 비용이 많이 소모된다. Thread가 많이 생성될 경우 OOM이 발생할 수 있다.)
-  2. _자원관리_ (하드웨어의 프로세서보다 더 많은 Thread 생성 시 대기상태의 Thread가 많아지고, 메모리를 많이 차지한다.)
-
-
-* **Thread의 재사용**
-  - Get Task (Worker Queue) -> Task Run -> Repeat or Wait
-
-#### Volatile
-MultiThread 환경에서 변수를 Main Memory에 저장하겠다고 명시하는 것
-
-![Volatile](img/img_volatile.png)
-
-* **유용할 때?**
-  - MultiThread 환경에서 하나의 Thread 만 Read&Write하고 나머지 Thread에서는 Read할 때 _가장 최신의 값 보장_
-  - 변수의 값이 최신이어야 할 때.
-* **여러 Thread에서 Write 해야할 때?**
-  - synchronized로 원자성:Atomic을 보장해야함.
-* **성능이슈?**
-  - CPU Cash 보다 Main Memory가 비용이 더 큼.
-
-
 
 #### Executor Framework (작업 스케쥴링)
 Executor는 작업의 등록과 실행을 분리하는 표준적인 방법 (Producer-Consumer Pattern)<br/>
@@ -112,15 +84,35 @@ Executor는 작업의 등록과 실행을 분리하는 표준적인 방법 (Prod
 - Executor 상태에 따른 결과를 가져올 수 있다.
 
 
+#### Thread Pool
+> Get Task (Worker Queue) -> Task Run -> Repeat or Wait
+
+  ![ThreadPool](img/img_treadpool.png)
 
 
+* **Thread를 과도하게 생성하게 되면?**
+  1. _Overhead_ (Thread 생성/취소/종료 후 자원을 반환하는데 비용이 많이 소모된다. Thread가 많이 생성될 경우 OOM이 발생할 수 있다.)
+  2. _자원관리_ (하드웨어의 프로세서보다 더 많은 Thread 생성 시 대기상태의 Thread가 많아지고, 메모리를 많이 차지한다.)
+
+* **Options**
+- New Fixed ThreadPool : Thread 개수 제한
+- New Cached ThreadPool : 쉬는 Thread 종료 + 부족한 Thread 생성
+- New Single ThreadExecutor : Thread 1개
+- New Scheduled ThreadPool : Thread 개수 제한 + 시작 시간 정함
+
+* **ForkJoinPool**
+  [Java7] 큰 업무를 작은 업무로 나눠서 일함 | 쉬고 있는 Thread는 다른 Thread의 일을 가지고 와서 일함
 
 
+#### Volatile
+MultiThread 환경에서 변수를 Main Memory에 저장하겠다고 명시하는 것
 
+![Volatile](img/img_volatile.png)
 
-* 멀티
-* 통신
-* 스케쥴링
-* 동기화
-* 성능 튜닝
-* 메모리 관리
+* **유용할 때?**
+  - MultiThread 환경에서 하나의 Thread 만 Read&Write하고 나머지 Thread에서는 Read할 때 _가장 최신의 값 보장_
+  - 변수의 값이 최신이어야 할 때.
+* **여러 Thread에서 Write 해야할 때?**
+  - synchronized로 원자성:Atomic을 보장해야함.
+* **성능이슈?**
+  - CPU Cash 보다 Main Memory가 비용이 더 큼.
