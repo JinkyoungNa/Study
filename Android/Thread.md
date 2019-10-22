@@ -41,28 +41,50 @@ _순차처리가 중요하므로 꼭 동일한 쓰레드에서 처리_
 #### AsyncTask
 HandlerThread를 별도로 개발하지 않고도 사용 가능. 제네릭스(Generics)로 내부 타입 설정도 가능하고, onPreExcute(), onPostExcute(), onProgressUpdate()에서 UI변경 작업을 할 수 있다.
 
+
+
+
+
+
+
 # MultiThread
+병렬프로그래밍 | 여러개의 프로세서를 효율적으로 사용가능하며, 전반적인 속도를 향상시킬 수 있다.
 > Main(UI) Thread에서 시간이 걸리는 작업을 실행한다면, Application의 반응성은 낮아지고,(자원효율성 저하) ANR(Android Not Responding) 상태로 전환 될 수도 있다. 따라서 작업을 여러 Thread로 분리하고 Thread간에 통신 하는 방법이 필요하게 되었다.
 
 > ##### Refs
 > * [Executor Framework에대한 고찰 - 1](https://www.childc.co.kr/629)
 > * [Executor Framework에대한 고찰 - 2](https://www.childc.co.kr/631)
 > * [Executor Framework에대한 고찰 - 3](https://www.childc.co.kr/633)
+> * [Executor 프레임워크](https://12bme.tistory.com/359)
 > * [Volatile](https://www.childc.co.kr/632)
 > * [쓰레드풀 과 ForkJoinPool](https://hamait.tistory.com/612)
-
-#### 병렬프로그래밍
-여러개의 프로세서를 효율적으로 사용가능하며, 전반적인 속도를 향상시킬 수 있다.
-
-**Thread를 과도하게 생성하게 되면?**
-  1. _Overhead_ (Thread 생성/취소/종료 후 자원을 반환하는데 비용이 많이 소모된다. Thread가 많이 생성될 경우 OOM이 발생할 수 있다.)
-  2. _자원관리_ (하드웨어의 프로세서보다 더 많은 Thread 생성 시 대기상태의 Thread가 많아지고, 메모리를 많이 차지한다.)
+> * [Java volatile이란?](https://nesoy.github.io/articles/2018-06/Java-volatile)
 
 #### Thread Pool
   ![ThreadPool](img/img_treadpool.png)
 
-**Thread의 재사용**
-Get Task (Worker Queue) -> Task Run -> Repeat or Wait
+* **Thread를 과도하게 생성하게 되면?**
+  1. _Overhead_ (Thread 생성/취소/종료 후 자원을 반환하는데 비용이 많이 소모된다. Thread가 많이 생성될 경우 OOM이 발생할 수 있다.)
+  2. _자원관리_ (하드웨어의 프로세서보다 더 많은 Thread 생성 시 대기상태의 Thread가 많아지고, 메모리를 많이 차지한다.)
+
+
+* **Thread의 재사용**
+  - Get Task (Worker Queue) -> Task Run -> Repeat or Wait
+
+#### Volatile
+MultiThread 환경에서 변수를 Main Memory에 저장하겠다고 명시하는 것
+
+![Volatile](img/img_volatile.png)
+
+* **유용할 때?**
+  - MultiThread 환경에서 하나의 Thread 만 Read&Write하고 나머지 Thread에서는 Read할 때 _가장 최신의 값 보장_
+  - 변수의 값이 최신이어야 할 때.
+* **여러 Thread에서 Write 해야할 때?**
+  - synchronized로 원자성:Atomic을 보장해야함.
+* **성능이슈?**
+  - CPU Cash 보다 Main Memory가 비용이 더 큼.
+
+
 
 #### Executor Framework (작업 스케쥴링)
 Executor는 작업의 등록과 실행을 분리하는 표준적인 방법 (Producer-Consumer Pattern)<br/>
@@ -77,11 +99,17 @@ Executor는 작업의 등록과 실행을 분리하는 표준적인 방법 (Prod
 **Executor Service**
 * Executor의 생명주기관련 인터페이스
 * Status
-  1. Running
-  2. Shutting Down
-  3. Terminated
+  1. Running : 실행
+  2. Shutting Down : 종료 절차 진행
+  3. Terminated : 종료
 
+* Callable
+  - Runnable의 작업에 대한 Callback을 받을 수 있다.
+  - Exception도 발생 시킬 수 있다.
 
+* Future
+- Executor 작업이 종료 되었는지 확인
+- Executor 상태에 따른 결과를 가져올 수 있다.
 
 
 
