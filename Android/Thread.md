@@ -31,6 +31,8 @@ _순차처리가 중요하므로 꼭 동일한 쓰레드에서 처리_
 
   ![MainThread](img/img_andoid_mainthread.png)
 
+멀티스레드 환경에서 동기화 이슈를 줄이기 위해 Looper와 Handler 사용
+
   **처리 순서**
   * System Event Message 전달
   * Handler가 MessageQueue에 전달
