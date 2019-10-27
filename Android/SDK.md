@@ -18,6 +18,8 @@ C[Window_Punched] --> D[View_Blended]
 
 * **Lifecycle**
 ![Lifecycle](img/img_activity_lifecycle.png)
+* OnStart : 화면에 보이기 직전에 호출
+* OnResume : 사용자와 상호작용 하기 직전에 호출
 
 * **View 그리는 순서**
 - OnAttachedToWindow
