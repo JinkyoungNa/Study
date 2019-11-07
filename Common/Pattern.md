@@ -4,6 +4,10 @@ https://realzero0.github.io/study/2017/06/12/디자인-패턴-정리.html
 
 ![MVC](img/img_gof_pattern.png)
 
+
+#### Observer vs Publisher - Subscriber
+https://jistol.github.io/software%20engineering/2018/04/11/observer-pubsub-pattern/
+
 #### Prototype
 미리 만들어진 객체를 clone, clone을 정의.
 

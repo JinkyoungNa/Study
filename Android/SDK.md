@@ -178,3 +178,7 @@ Wakelocks 무시, AlarmManager 연기, Wi-fi 스캔 사용 불가
 
 ### 프로세스 간 통신
 IPC, AIDL. Android Interface Definition Language.
+
+
+### AndroidX
+[Support Library, AndroidX 그리고 Jetifier 항해기](https://medium.com/daangn/support-library-androidx-%EA%B7%B8%EB%A6%AC%EA%B3%A0-jetifier-%ED%95%AD%ED%95%B4%EA%B8%B0-2fb558f56be)
